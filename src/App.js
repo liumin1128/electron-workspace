@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Dropzone from 'react-dropzone';
-import pkg from '../package.json';
+import { run } from './utils/common';
 import './App.css';
 
 const electron = window.require('electron');
@@ -27,12 +27,18 @@ class App extends Component {
         <br />
 
         {
-          list.map(i => (<div>
+          list.map(i => (<div key={i.path}>
             <h1>{i.name}</h1>
             <h2>{i.path}</h2>
             <ul>
-              {Object.keys(i.scripts).map(key => (<li>
-                {key}: {i.scripts[key]}
+              {Object.keys(i.scripts).map(key => (<li key={key}>
+                <Button onClick={() => {
+                  run(i.scripts[key], (result) => {
+                    console.log('result');
+                    console.log(result);
+                  }, { cwd: i.path });
+                }}
+                >{key}</Button>
               </li>))}
             </ul>
           </div>))
@@ -70,12 +76,7 @@ class App extends Component {
 
         <Button onClick={() => {
           console.log('pkg');
-          const iii = 'ls ./'.split(' ');
-          const [cmd, ...options] = iii;
 
-          RunCmd(cmd, options, (result) => {
-            console.log(result);
-          });
           // const sss = new BrowserWindow({
           //   x: 50,
           //   y: 50,
@@ -95,23 +96,5 @@ class App extends Component {
   }
 }
 
-
-function RunCmd(cmd, args, cb) {
-  const { spawn } = window.require('child_process');
-  const child = spawn(cmd, args);
-  let result = '';
-  child.stdout.on('data', (data) => {
-    result += data.toString();
-  });
-  child.stdout.on('end', () => {
-    cb(result);
-  });
-  child.stderr.on('data', (data) => {
-    console.log(`Error: \n${data}`);
-  });
-  child.on('exit', (code, signal) => {
-    console.log(`Exit: ${code}`);
-  });
-}
 
 export default App;
