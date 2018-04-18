@@ -12,6 +12,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditIcon from '@material-ui/icons/Edit';
+import PlayIcon from '@material-ui/icons/PlayCircleOutline';
+import { run } from '../../utils/common';
 
 const styles = theme => ({
   card: {
@@ -70,11 +73,31 @@ class RecipeReviewCard extends React.Component {
           />
 
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
+            <IconButton
+              onClick={async () => {
+                const data = await run(
+                  `./code ${path}`,
+                  { cwd: '/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin' },
+                );
+                console.log('data');
+                console.log(data);
+              }}
+              aria-label="Add to favorites"
+            >
+              <EditIcon />
             </IconButton>
-            <IconButton aria-label="Share">
-              <ShareIcon />
+            <IconButton
+              onClick={async () => {
+                const data = await run(
+                  'npm run start',
+                  { cwd: path },
+                );
+                console.log('data');
+                console.log(data);
+              }}
+              aria-label="Share"
+            >
+              <PlayIcon />
             </IconButton>
             <IconButton
               className={classnames(classes.expand, {

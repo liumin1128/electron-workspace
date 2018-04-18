@@ -13,6 +13,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 const styles = {
   root: {
     flexGrow: 1,
+    '-webkit-app-region': 'drag',
   },
   flex: {
     flex: 1,
@@ -38,9 +39,7 @@ function ButtonAppBar(props) {
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            React
-          </Typography>
+          <Typography variant="title" color="inherit" className={classes.flex} />
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
