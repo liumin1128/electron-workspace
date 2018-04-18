@@ -32,11 +32,10 @@ class App extends Component {
             <h2>{i.path}</h2>
             <ul>
               {Object.keys(i.scripts).map(key => (<li key={key}>
-                <Button onClick={() => {
-                  run(i.scripts[key], (result) => {
-                    console.log('result');
-                    console.log(result);
-                  }, { cwd: i.path });
+                <Button onClick={async () => {
+                  const data = await run(i.scripts[key], { cwd: i.path });
+                  console.log('data');
+                  console.log(data);
                 }}
                 >{key}</Button>
               </li>))}
