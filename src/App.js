@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Dropzone from 'react-dropzone';
+import Grid from 'material-ui/Grid';
 import { run } from './utils/common';
 import Appbar from './components/appbar';
 import AddDialog from './components/add';
+import ProjectItem from './components/item';
 
 
 const electron = window.require('electron');
@@ -25,24 +27,35 @@ class App extends Component {
   render() {
     const { list } = this.state;
     return (
-      <div className="App">
+      <div>
         <Appbar />
         <AddDialog />
+        <div style={{ padding: 16 }}>
+          <Grid container spacing={24}>
+            {
+              list.map(i => (<Grid key={i.path} item xs={12}>
+                <ProjectItem {...i} />
+              </Grid>))
+            }
+          </Grid>
+        </div>
+
         {
-          list.map(i => (<div key={i.path}>
-            <h1>{i.name}</h1>
-            <h2>{i.path}</h2>
-            <ul>
-              {Object.keys(i.scripts).map(key => (<li key={key}>
-                <Button onClick={async () => {
-                  const data = await run(i.scripts[key], { cwd: i.path });
-                  console.log('data');
-                  console.log(data);
-                }}
-                >{key}</Button>
-              </li>))}
-            </ul>
-          </div>))
+
+          // list.map(i => (<div key={i.path}>
+          //   <h1>{i.name}</h1>
+          //   <h2>{i.path}</h2>
+          //   <ul>
+          //     {Object.keys(i.scripts).map(key => (<li key={key}>
+          //       <Button onClick={async () => {
+          //         const data = await run(i.scripts[key], { cwd: i.path });
+          //         console.log('data');
+          //         console.log(data);
+          //       }}
+          //       >{key}</Button>
+          //     </li>))}
+          //   </ul>
+          // </div>))
         }
 
         <Dropzone onDrop={(files) => {

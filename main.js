@@ -12,8 +12,8 @@ let win;
 function createWindow() {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 360,
-    height: 600,
+    width: 400,
+    height: 700,
     // 去掉菜单栏
     frame: false,
     // titleBarStyle: 'hidden-inset',
