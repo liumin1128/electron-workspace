@@ -2,6 +2,7 @@
   "name": "work-app",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.42",
     "material-ui": "^1.0.0-beta.42",
@@ -12,9 +13,13 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
+    "electron": "electron .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "electron": "^1.8.4"
   }
 }
