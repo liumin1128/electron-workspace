@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 // const url = require('url');
 // const pkg = require('./package.json'); // 引用package.json
@@ -55,7 +55,29 @@ function createWindow() {
     // 与此同时，你应该删除相应的元素。
     win = null;
   });
+
+  // 退出
+  ipcMain.on('window-all-closed', () => {
+    console.log('关闭');
+    app.quit();
+  });
+  // 最小化
+  ipcMain.on('hide-window', () => {
+    console.log('最小化');
+    win.minimize();
+  });
+  // 最大化
+  ipcMain.on('show-window', () => {
+    console.log('最大化');
+    win.maximize();
+  });
+  // 还原
+  ipcMain.on('orignal-window', () => {
+    console.log('还原');
+    win.unmaximize();
+  });
 }
+
 
 // Electron 会在初始化后并准备
 // 创建浏览器窗口时，调用这个函数。

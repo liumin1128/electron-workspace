@@ -10,6 +10,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ClearIcon from '@material-ui/icons/Clear';
 import RemoveIcon from '@material-ui/icons/Remove';
 
+
+const electron = window.require('electron');
+const { remote, shell, ipcRenderer } = electron;
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -30,10 +34,25 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton size="small" className={classes.menuButton} color="inherit" aria-label="Menu">
+          <IconButton
+            onClick={() => {
+              ipcRenderer.send('window-all-closed');
+            }}
+            size="small"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Menu"
+          >
             <ClearIcon />
           </IconButton>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+          <IconButton
+            onClick={() => {
+              ipcRenderer.send('hide-window');
+            }}
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Menu"
+          >
             <RemoveIcon />
           </IconButton>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
