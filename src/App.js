@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Dropzone from 'react-dropzone';
 import { run } from './utils/common';
-import './App.css';
+import Appbar from './components/appbar';
+import AddButton from './components/float-button';
 
 const electron = window.require('electron');
 const fs = window.require('fs');
@@ -24,8 +25,8 @@ class App extends Component {
     const { list } = this.state;
     return (
       <div className="App">
-        <br />
-
+        <Appbar />
+        <AddButton />
         {
           list.map(i => (<div key={i.path}>
             <h1>{i.name}</h1>

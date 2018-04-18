@@ -15,7 +15,7 @@ function createWindow() {
     width: 360,
     height: 600,
     // 去掉菜单栏
-    // frame: false,
+    frame: false,
     // titleBarStyle: 'hidden-inset',
     // hasShadow: false,
     // icon: logo,
