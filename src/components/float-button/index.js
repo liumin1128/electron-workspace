@@ -16,10 +16,16 @@ const styles = theme => ({
 });
 
 function FloatingActionButtons(props) {
-  const { classes } = props;
+  const { classes, ...other } = props;
   return (
     <div>
-      <Button variant="fab" color="primary" aria-label="add" className={classes.button}>
+      <Button
+        variant="fab"
+        color="primary"
+        aria-label="add"
+        className={classes.button}
+        {...other}
+      >
         <AddIcon />
       </Button>
     </div>

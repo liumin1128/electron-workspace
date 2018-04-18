@@ -3,7 +3,8 @@ import Button from 'material-ui/Button';
 import Dropzone from 'react-dropzone';
 import { run } from './utils/common';
 import Appbar from './components/appbar';
-import AddButton from './components/float-button';
+import AddDialog from './components/add';
+
 
 const electron = window.require('electron');
 const fs = window.require('fs');
@@ -26,7 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <Appbar />
-        <AddButton />
+        <AddDialog />
         {
           list.map(i => (<div key={i.path}>
             <h1>{i.name}</h1>
