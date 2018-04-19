@@ -18,7 +18,7 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-@connect()
+@connect(({ global }) => ({ open: global.showAddModal }))
 class AlertDialogSlide extends React.Component {
   state = {
     open: false,
@@ -30,6 +30,8 @@ class AlertDialogSlide extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    const { dispatch } = this.props;
+    dispatch({ type: 'global/toggle', payload: { key: 'showAddModal' } });
   };
 
   onDrop = (files) => {
@@ -61,10 +63,11 @@ class AlertDialogSlide extends React.Component {
   }
 
   render() {
+    const { open } = this.props;
     return (
       <div>
         <Dialog
-          open={this.state.open}
+          open={open}
           transition={Transition}
           keepMounted
           onClose={this.handleClose}
@@ -76,31 +79,8 @@ class AlertDialogSlide extends React.Component {
           </DialogTitle>
           <DialogContent>
             <Dropzone onDrop={(files) => {
-            this.onDrop(files);
-            // files.map(({ path, name }) => {
-            //   // console.log(path);
-            //   const stat = fs.statSync(path);
-            //   // console.log('stat');
-            //   // console.log(stat);
-            //   if (stat.isDirectory()) {
-            //     const hasPkg = fs.existsSync(`${path}/package.json`);
-            //     if (hasPkg) {
-            //       const itemPkg = window.require(`${path}/package.json`);
-            //       // console.log('itemPkg');
-            //       // console.log(itemPkg);
-            //       this.addProject({
-            //         path,
-            //         name: itemPkg.name || name,
-            //         scripts: itemPkg.scripts,
-            //       });
-            //     } else {
-            //       const tip = new Notification('提示', {
-            //         body: '无法检测到package.json',
-            //       });
-            //     }
-            //   }
-            // });
-          }}
+              this.onDrop(files);
+            }}
             >
               <p>请拖拽文件夹到此处，或打开文件夹</p>
             </Dropzone>
