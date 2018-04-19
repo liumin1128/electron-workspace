@@ -33,7 +33,7 @@ function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" style={{ boxShadow: 'none' }}>
         <Toolbar>
           <IconButton
             onClick={() => {
