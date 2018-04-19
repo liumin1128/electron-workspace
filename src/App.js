@@ -7,6 +7,7 @@ import { run } from './utils/common';
 import Appbar from './components/appbar';
 import AddDialog from './components/add';
 import ProjectItem from './components/item';
+import ProjectList from './view/project/list';
 import reduxRoot from './hoc/reduxRoot';
 import styleRoot from './hoc/styleRoot';
 // import { store, persistor } from './store';
@@ -36,6 +37,7 @@ export default class App extends Component {
         <CssBaseline />
         <Appbar />
         <AddDialog />
+        <ProjectList />
         <div style={{ padding: 16 }}>
           <Grid container spacing={24}>
             {
