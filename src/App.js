@@ -3,24 +3,13 @@ import Button from 'material-ui/Button';
 import Dropzone from 'react-dropzone';
 import Grid from 'material-ui/Grid';
 import CssBaseline from 'material-ui/CssBaseline';
-// import { PersistGate } from 'redux-persist/integration/react';
-// import { Provider } from 'react-redux';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import purple from 'material-ui/colors/purple';
-import blue from 'material-ui/colors/blue';
 import { run } from './utils/common';
 import Appbar from './components/appbar';
 import AddDialog from './components/add';
 import ProjectItem from './components/item';
-import redux from './store/hoc';
+import reduxRoot from './hoc/reduxRoot';
+import styleRoot from './hoc/styleRoot';
 // import { store, persistor } from './store';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: blue, // Purple and green play nicely together.
-    secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
-  },
-});
 
 const electron = window.require('electron');
 const fs = window.require('fs');
@@ -28,7 +17,8 @@ const fs = window.require('fs');
 const { remote, shell } = electron;
 const { dialog, BrowserWindow } = remote;
 
-@redux
+@reduxRoot
+@styleRoot
 export default class App extends Component {
   state = {
     list: [],
@@ -42,22 +32,21 @@ export default class App extends Component {
   render() {
     const { list } = this.state;
     return (
-      <MuiThemeProvider theme={theme}>
-        <div>
-          <CssBaseline />
-          <Appbar />
-          <AddDialog />
-          <div style={{ padding: 16 }}>
-            <Grid container spacing={24}>
-              {
+      <div>
+        <CssBaseline />
+        <Appbar />
+        <AddDialog />
+        <div style={{ padding: 16 }}>
+          <Grid container spacing={24}>
+            {
               list.map(i => (<Grid key={i.path} item xs={12}>
                 <ProjectItem {...i} />
               </Grid>))
             }
-            </Grid>
-          </div>
+          </Grid>
+        </div>
 
-          {
+        {
 
           // list.map(i => (<div key={i.path}>
           //   <h1>{i.name}</h1>
@@ -75,7 +64,7 @@ export default class App extends Component {
           // </div>))
         }
 
-          <Dropzone onDrop={(files) => {
+        <Dropzone onDrop={(files) => {
           console.log(files);
           files.map(({ path, name }) => {
             console.log(path);
@@ -101,11 +90,11 @@ export default class App extends Component {
             }
           });
         }}
-          >
-            <p>Try dropping some files here, or click to select files to upload.</p>
-          </Dropzone>
+        >
+          <p>Try dropping some files here, or click to select files to upload.</p>
+        </Dropzone>
 
-          <Button onClick={() => {
+        <Button onClick={() => {
           console.log('pkg');
 
           // const sss = new BrowserWindow({
@@ -121,9 +110,8 @@ export default class App extends Component {
           // dialog.showMessageBox({ title: '8888', message: '6666' });
           // console.log(dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }));
         }}
-          >start</Button>
-        </div>
-      </MuiThemeProvider>
+        >start</Button>
+      </div>
     );
   }
 }
