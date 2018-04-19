@@ -36,6 +36,28 @@ class AlertDialogSlide extends React.Component {
     const { dispatch } = this.props;
     dispatch({ type: 'test' });
     console.log(files);
+    files.map(({ path, name }) => {
+      const stat = fs.statSync(path);
+      if (stat.isDirectory()) {
+        const hasPkg = fs.existsSync(`${path}/package.json`);
+        if (hasPkg) {
+          const itemPkg = window.require(`${path}/package.json`);
+          const list = [{
+            path,
+            name: itemPkg.name || name,
+            scripts: itemPkg.scripts,
+          }];
+          dispatch({
+            type: 'project/push',
+            payload: { list },
+          });
+        } else {
+          const tip = new Notification('提示', {
+            body: '无法检测到package.json',
+          });
+        }
+      }
+    });
   }
 
   render() {
