@@ -5,6 +5,9 @@ import SwipeableViews from 'react-swipeable-views';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
+import HomeIcon from '@material-ui/icons/Home';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
 
 function TabContainer({ children, dir }) {
   return (
@@ -21,7 +24,7 @@ TabContainer.propTypes = {
 
 const styles = theme => ({
   root: {
-    // backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper,
     width: '100%',
   },
 });
@@ -44,27 +47,29 @@ class FullWidthTabs extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar position="static">
+
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="secondary"
-            textColor="secondary"
+            // textColor="secondary"
             fullWidth
           >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
+            <Tab icon={<HomeIcon />} />
+            <Tab icon={<FavoriteIcon />} />
+            <Tab icon={<PersonPinIcon />} />
           </Tabs>
         </AppBar>
+
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
           <TabContainer dir={theme.direction}>Item One</TabContainer>
-          <TabContainer dir={theme.direction}>Item Two</TabContainer>
-          <TabContainer dir={theme.direction}>Item Three</TabContainer>
+          <TabContainer dir={theme.direction}>暂未开放</TabContainer>
+          <TabContainer dir={theme.direction}>暂未开放</TabContainer>
         </SwipeableViews>
       </div>
     );
