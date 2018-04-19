@@ -4,7 +4,6 @@ import CssBaseline from 'material-ui/CssBaseline';
 import { run } from './utils/common';
 import Appbar from './components/appbar';
 import AddDialog from './components/add';
-import ProjectList from './view/project/list';
 import reduxRoot from './hoc/reduxRoot';
 import styleRoot from './hoc/styleRoot';
 import Tabs from './components/tabs';
@@ -36,11 +35,8 @@ export default class App extends Component {
         <Appbar />
         <Tabs />
         <AddDialog />
-        <ProjectList />
-        <Button onClick={() => {
-          console.log('pkg');
 
-          // const sss = new BrowserWindow({
+        {
           //   x: 50,
           //   y: 50,
           // });
@@ -52,8 +48,8 @@ export default class App extends Component {
           // shell.openExternal('https://github.com');
           // dialog.showMessageBox({ title: '8888', message: '6666' });
           // console.log(dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }));
-        }}
-        >start</Button>
+        }
+
       </div>
     );
   }

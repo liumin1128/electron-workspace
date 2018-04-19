@@ -11,15 +11,13 @@ export default class ProjiectList extends PureComponent {
     console.log(project);
     const { list } = project;
     return (
-      <div style={{ padding: 16 }}>
-        <Grid container spacing={24}>
-          {
-            list.map(i => (<Grid key={i.path} item xs={12}>
-              <ProjectItem {...i} />
-            </Grid>))
-          }
-        </Grid>
-      </div>
+      <Grid container spacing={16}>
+        {
+          list.map(i => (<Grid key={i.path} item xs={12}>
+            <ProjectItem {...i} />
+          </Grid>))
+        }
+      </Grid>
     );
   }
 }
