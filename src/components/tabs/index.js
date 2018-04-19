@@ -52,8 +52,8 @@ class FullWidthTabs extends React.Component {
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
-            indicatorColor="secondary"
-            // textColor="secondary"
+            // indicatorColor="inherit"
+            // textColor="inherit"
             fullWidth
           >
             <Tab icon={<HomeIcon />} />

@@ -9,6 +9,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ClearIcon from '@material-ui/icons/Clear';
 import RemoveIcon from '@material-ui/icons/Remove';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 
 const electron = window.require('electron');
@@ -23,9 +24,16 @@ const styles = {
   flex: {
     flex: 1,
   },
+  icon: {
+    fontSize: 16,
+  },
   menuButton: {
+    width: 30,
+    height: 30,
+  },
+  menus: {
     marginLeft: -12,
-    marginRight: 20,
+    marginTop: -20,
   },
 };
 
@@ -35,30 +43,41 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="fixed" style={{ boxShadow: 'none' }}>
         <Toolbar>
-          <IconButton
-            onClick={() => {
-              ipcRenderer.send('window-all-closed');
-            }}
-            size="small"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-          >
-            <ClearIcon />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              ipcRenderer.send('hide-window');
-            }}
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-          >
-            <RemoveIcon />
-          </IconButton>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
+          <div className={classes.menus}>
+            <IconButton
+              onClick={() => { ipcRenderer.send('window-all-closed'); }}
+              classes={{ root: classes.menuButton }}
+              color="inherit"
+              aria-label="Menu"
+            >
+              <ClearIcon className={classes.icon} />
+            </IconButton>
+            <IconButton
+              onClick={() => { ipcRenderer.send('hide-window'); }}
+              classes={{ root: classes.menuButton }}
+              color="inherit"
+              aria-label="Menu"
+            >
+              <RemoveIcon className={classes.icon} />
+            </IconButton>
+
+            <IconButton
+              classes={{ root: classes.menuButton }}
+              color="inherit"
+              aria-label="Menu"
+            >
+              <MenuIcon className={classes.icon} />
+            </IconButton>
+            <IconButton
+              classes={{ root: classes.menuButton }}
+              color="inherit"
+              aria-label="Menu"
+            >
+              <SettingsIcon className={classes.icon} />
+            </IconButton>
+          </div>
+
+
           <Typography variant="title" color="inherit" className={classes.flex} />
           <Button color="inherit">Login</Button>
         </Toolbar>
