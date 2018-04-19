@@ -3,6 +3,8 @@ import Button from 'material-ui/Button';
 import Dropzone from 'react-dropzone';
 import Grid from 'material-ui/Grid';
 import CssBaseline from 'material-ui/CssBaseline';
+// import { PersistGate } from 'redux-persist/integration/react';
+// import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import purple from 'material-ui/colors/purple';
 import blue from 'material-ui/colors/blue';
@@ -10,6 +12,8 @@ import { run } from './utils/common';
 import Appbar from './components/appbar';
 import AddDialog from './components/add';
 import ProjectItem from './components/item';
+import redux from './store/hoc';
+// import { store, persistor } from './store';
 
 const theme = createMuiTheme({
   palette: {
@@ -18,14 +22,14 @@ const theme = createMuiTheme({
   },
 });
 
-
 const electron = window.require('electron');
 const fs = window.require('fs');
 
 const { remote, shell } = electron;
 const { dialog, BrowserWindow } = remote;
 
-class App extends Component {
+@redux
+export default class App extends Component {
   state = {
     list: [],
   }
@@ -125,4 +129,4 @@ class App extends Component {
 }
 
 
-export default App;
+// export default App;
