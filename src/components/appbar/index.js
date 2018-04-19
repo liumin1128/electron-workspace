@@ -18,6 +18,7 @@ const styles = {
   root: {
     flexGrow: 1,
     '-webkit-app-region': 'drag',
+    height: 56,
   },
   flex: {
     flex: 1,
@@ -32,7 +33,7 @@ function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             onClick={() => {
