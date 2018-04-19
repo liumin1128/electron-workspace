@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,
@@ -17,6 +18,7 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
+@connect()
 class AlertDialogSlide extends React.Component {
   state = {
     open: false,
@@ -29,6 +31,12 @@ class AlertDialogSlide extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  onDrop = (files) => {
+    const { dispatch } = this.props;
+    dispatch({ type: 'test' });
+    console.log(files);
+  }
 
   render() {
     return (
@@ -47,30 +55,30 @@ class AlertDialogSlide extends React.Component {
           </DialogTitle>
           <DialogContent>
             <Dropzone onDrop={(files) => {
-            // console.log(files);
-            files.map(({ path, name }) => {
-              // console.log(path);
-              const stat = fs.statSync(path);
-              // console.log('stat');
-              // console.log(stat);
-              if (stat.isDirectory()) {
-                const hasPkg = fs.existsSync(`${path}/package.json`);
-                if (hasPkg) {
-                  const itemPkg = window.require(`${path}/package.json`);
-                  // console.log('itemPkg');
-                  // console.log(itemPkg);
-                  this.addProject({
-                    path,
-                    name: itemPkg.name || name,
-                    scripts: itemPkg.scripts,
-                  });
-                } else {
-                  const tip = new Notification('提示', {
-                    body: '无法检测到package.json',
-                  });
-                }
-              }
-            });
+            this.onDrop(files);
+            // files.map(({ path, name }) => {
+            //   // console.log(path);
+            //   const stat = fs.statSync(path);
+            //   // console.log('stat');
+            //   // console.log(stat);
+            //   if (stat.isDirectory()) {
+            //     const hasPkg = fs.existsSync(`${path}/package.json`);
+            //     if (hasPkg) {
+            //       const itemPkg = window.require(`${path}/package.json`);
+            //       // console.log('itemPkg');
+            //       // console.log(itemPkg);
+            //       this.addProject({
+            //         path,
+            //         name: itemPkg.name || name,
+            //         scripts: itemPkg.scripts,
+            //       });
+            //     } else {
+            //       const tip = new Notification('提示', {
+            //         body: '无法检测到package.json',
+            //       });
+            //     }
+            //   }
+            // });
           }}
             >
               <p>请拖拽文件夹到此处，或打开文件夹</p>

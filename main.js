@@ -12,7 +12,7 @@ let win;
 function createWindow() {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 400,
+    width: 800,
     height: 700,
     // 去掉菜单栏
     frame: false,
@@ -43,7 +43,7 @@ function createWindow() {
   // }
 
   // 打开开发者工具。
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   BrowserWindow.addDevToolsExtension('/Users/liumin/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.2.1_0');
   BrowserWindow.addDevToolsExtension('/Users/liumin/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.2_0');
