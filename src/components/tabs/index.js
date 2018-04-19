@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from 'material-ui/AppBar';
@@ -42,27 +43,27 @@ const styles = theme => ({
   },
 });
 
-class FullWidthTabs extends React.Component {
+@connect()
+class FullWidthTabs extends PureComponent {
   state = {
     value: 0,
   };
-
   handleChange = (event, value) => {
     this.setState({ value });
   };
-
   handleChangeIndex = (index) => {
     this.setState({ value: index });
   };
-
   render() {
-    const { classes, theme } = this.props;
-
+    const { classes, theme, dispatch } = this.props;
     const fabs = [
       {
         color: 'primary',
         className: classes.fab,
         icon: <AddIcon />,
+        onClick: () => {
+          dispatch({ type: 'global/toggle', payload: { key: 'showAddModal' } });
+        },
       },
       {
         color: 'secondary',
@@ -120,7 +121,7 @@ class FullWidthTabs extends React.Component {
             }}
             unmountOnExit
           >
-            <Button variant="fab" className={fab.className} color={fab.color}>
+            <Button onClick={fab.onClick} variant="fab" className={fab.className} color={fab.color}>
               {fab.icon}
             </Button>
           </Zoom>
