@@ -1,12 +1,16 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
+import immutableTransform from 'redux-persist-transform-immutable';
 import storage from 'redux-persist/lib/storage';
 import effect from './utils/effect';
 import rootReducer from './reducers';
 import effects from './effects';
 
 const persistConfig = {
+  transforms: [immutableTransform({
+    whitelist: ['project'],
+  })],
   key: 'root',
   storage,
 };

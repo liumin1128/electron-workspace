@@ -7,8 +7,6 @@ import ProjectItem from './item';
 export default class ProjiectList extends PureComponent {
   render() {
     const { project } = this.props;
-    console.log('project');
-    console.log(project);
     const { list } = project;
     return (
       <Grid container spacing={16}>
