@@ -99,6 +99,21 @@ class RecipeReviewCard extends React.Component {
             >
               <PlayIcon />
             </IconButton>
+
+            <IconButton
+              onClick={async () => {
+                const data = await run(
+                  'npm run start',
+                  { cwd: path },
+                );
+                console.log('data');
+                console.log(data);
+              }}
+              aria-label="Share"
+            >
+              <PlayIcon />
+            </IconButton>
+
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,

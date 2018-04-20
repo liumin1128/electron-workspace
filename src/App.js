@@ -35,21 +35,6 @@ export default class App extends Component {
         <Appbar />
         <Tabs />
         <AddDialog />
-
-        {
-          //   x: 50,
-          //   y: 50,
-          // });
-          // new Notification('提示', {
-          //   body: '打包成功',
-          // });
-          // shell.showItemInFolder('/Users/liumin/Desktop/Electron/WeFlow');
-          // shell.openExternal('');
-          // shell.openExternal('https://github.com');
-          // dialog.showMessageBox({ title: '8888', message: '6666' });
-          // console.log(dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }));
-        }
-
       </div>
     );
   }
