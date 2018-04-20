@@ -56,8 +56,12 @@ class RecipeReviewCard extends React.Component {
       classes, name, path, scripts, dispatch, log,
     } = this.props;
 
-    console.log('log');
-    console.log(log);
+
+    const logs = log
+      .get('list')
+      .filter(i => i.project === 'api.react.mobi')
+      .toJS();
+
 
     return (
       <div>
@@ -142,6 +146,9 @@ class RecipeReviewCard extends React.Component {
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
+              <pre>
+                {logs.map(i => i.data)}
+              </pre>
               <Typography paragraph variant="body2">
                 Method:
               </Typography>

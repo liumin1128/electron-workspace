@@ -7,8 +7,8 @@ import ProjectItem from './item';
 export default class ProjiectList extends PureComponent {
   render() {
     const { project, dispatch } = this.props;
-    // console.log('project');
-    // console.log(project);
+    console.log('project');
+    console.log(project);
     const list = project.get('list').toJS();
     // console.log('list');
     // console.log(list);

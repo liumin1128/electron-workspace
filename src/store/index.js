@@ -9,7 +9,7 @@ import effects from './effects';
 
 const persistConfig = {
   transforms: [immutableTransform({
-    whitelist: ['project'],
+    // whitelist: ['project'],
   })],
   key: 'root',
   storage,
