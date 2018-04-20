@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
@@ -42,6 +43,7 @@ const styles = theme => ({
   },
 });
 
+@connect(({ log }) => ({ log }))
 class RecipeReviewCard extends React.Component {
   state = { expanded: false };
 
@@ -51,8 +53,11 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const {
-      classes, name, path, scripts,
+      classes, name, path, scripts, dispatch, log,
     } = this.props;
+
+    console.log('log');
+    console.log(log);
 
     return (
       <div>
@@ -108,6 +113,16 @@ class RecipeReviewCard extends React.Component {
                 );
                 console.log('data');
                 console.log(data);
+                dispatch({
+                  type: 'log/push',
+                  payload: {
+                    project: name,
+                    script: 'ls ./',
+                    status: 'success',
+                    message: '运行成功',
+                    data,
+                  },
+                });
               }}
               aria-label="Share"
             >

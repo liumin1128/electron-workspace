@@ -1,13 +1,19 @@
+import { Map, List } from 'immutable';
+
 export default {
-  namespace: 'project',
-  initState: { list: [], isEnd: false, current: {} },
+  namespace: 'log',
+  initState: Map({ list: List([]) }),
   props: {
-    push({ list, ...other }, { payload }) {
-      return {
-        ...other,
-        list: list.concat(payload.list),
-        isEnd: payload.isEnd,
-      };
+    push(state, { payload }) {
+      // const {
+      //   project, script, status, message, data,
+      // } = payload;
+      // if (state.hasIn([project, script])) {
+      //   return state.updateIn([project, script], list => list.push({ status, message, data }));
+      // } else {
+      //   return state.setIn([project, script], () => List({ status, message, data }));
+      // }
+      return state.update('list', list => list.push(payload));
     },
   },
 };

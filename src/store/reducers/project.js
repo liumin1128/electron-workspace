@@ -1,16 +1,15 @@
-import Immutable from 'immutable';
+import { Map, List } from 'immutable';
 
 export default {
   namespace: 'project',
-  initState: {
-    list: Immutable.List([]),
-  },
+  initState: Map({ list: List([]) }),
   props: {
-    push({ list, ...other }, { payload }) {
-      return {
-        ...other,
-        list: list.push(payload),
-      };
+    push(state, { payload }) {
+      // return {
+      //   ...other,
+      //   list: list.push(payload),
+      // };
+      return state.update('list', list => list.push(payload));
     },
   },
 };
