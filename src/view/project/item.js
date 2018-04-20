@@ -45,7 +45,7 @@ const styles = theme => ({
 
 @connect(({ log }) => ({ log }))
 class RecipeReviewCard extends React.Component {
-  state = { expanded: false };
+  state = { expanded: true };
 
   handleExpandClick = () => {
     this.setState({ expanded: !this.state.expanded });
@@ -56,15 +56,30 @@ class RecipeReviewCard extends React.Component {
       classes, name, path, scripts, dispatch, log,
     } = this.props;
 
+    const list = log
+      .get('list')
+      .filter(i => i.project === name)
+      .groupBy(i => i.script);
 
     const logs = log
       .get('list')
-      .filter(i => i.project === 'api.react.mobi')
-      .toJS();
-
+      .filter(i => i.project === name);
+      // .toJS();
 
     return (
       <div>
+        <ul>
+          {
+            list.map((val, key) => {
+              return (<li>
+                <pre>
+                  {val.map(i => i.data)}
+                </pre>
+              </li>);
+            })
+          }
+        </ul>
+
         <Card className={classes.card}>
           <CardHeader
             // avatar={
@@ -108,6 +123,27 @@ class RecipeReviewCard extends React.Component {
             >
               <PlayIcon />
             </IconButton>
+
+            <button
+              onClick={async () => {
+              const data = await run(
+                'pwd -L',
+                { cwd: path },
+              );
+              console.log('data');
+              console.log(data);
+              dispatch({
+                type: 'log/push',
+                payload: {
+                  project: name,
+                  script: 'pwd -L',
+                  status: 'success',
+                  message: '运行成功',
+                  data,
+                },
+              });
+            }}
+            >pwd -L</button>
 
             <IconButton
               onClick={async () => {
