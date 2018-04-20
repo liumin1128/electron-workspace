@@ -103,7 +103,7 @@ class RecipeReviewCard extends React.Component {
             <IconButton
               onClick={async () => {
                 const data = await run(
-                  'npm run start',
+                  'ls ./',
                   { cwd: path },
                 );
                 console.log('data');
