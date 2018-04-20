@@ -2,7 +2,9 @@ import Immutable from 'immutable';
 
 export default {
   namespace: 'project',
-  initState: { list: Immutable.List([{ name: 'xxxx' }]), isEnd: false, current: {} },
+  initState: {
+    list: Immutable.List([{ name: 'xxxx' }]),
+  },
   props: {
     push({ list, ...other }, { payload }) {
       return {
