@@ -44,14 +44,13 @@ class AlertDialogSlide extends React.Component {
         const hasPkg = fs.existsSync(`${path}/package.json`);
         if (hasPkg) {
           const itemPkg = window.require(`${path}/package.json`);
-          const list = [{
-            path,
-            name: itemPkg.name || name,
-            scripts: itemPkg.scripts,
-          }];
           dispatch({
             type: 'project/push',
-            payload: { list },
+            payload: {
+              path,
+              name: itemPkg.name || name,
+              scripts: itemPkg.scripts,
+            },
           });
         } else {
           const tip = new Notification('提示', {

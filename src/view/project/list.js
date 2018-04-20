@@ -6,10 +6,20 @@ import ProjectItem from './item';
 @connect(({ project }) => ({ project }))
 export default class ProjiectList extends PureComponent {
   render() {
-    const { project } = this.props;
+    const { project, dispatch } = this.props;
     const { list } = project;
     return (
       <Grid container spacing={16}>
+        <button onClick={() => {
+          dispatch({
+            type: 'project/push',
+            payload: {
+              path: 'path11',
+              name: 'name11',
+            },
+          });
+        }}
+        >222</button>
         {
           list.map(i => (<Grid key={i.path} item xs={12}>
             <ProjectItem {...i} />
