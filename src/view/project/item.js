@@ -52,6 +52,14 @@ class RecipeReviewCard extends React.Component {
     this.setState({ expanded: !this.state.expanded });
   };
 
+  run = (script) => {
+    const { name, path, dispatch } = this.props;
+    dispatch({
+      type: 'runcommand',
+      payload: { project: name, script, path },
+    });
+  }
+
   render() {
     const {
       classes, name, path, scripts, dispatch, log,
@@ -193,12 +201,6 @@ class RecipeReviewCard extends React.Component {
 
             <button
               onClick={async () => {
-              // const data = await run(
-              //   'pwd -L',
-              //   { cwd: path },
-              // );
-              // console.log('data');
-              // console.log(data);
               dispatch({
                 type: 'runcommand',
                 payload: {
@@ -248,29 +250,12 @@ class RecipeReviewCard extends React.Component {
 
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
+              <h3>npm 命令</h3>
               {
-                  Object.keys(scripts).map(key => (<button
-                    onClick={async () => {
-                      const script = `npm run ${key}`;
-                    const data = await run(
-                      script,
-                      { cwd: path },
-                    );
-                    console.log('data');
-                    console.log(data);
-                    dispatch({
-                      type: 'log/push',
-                      payload: {
-                        project: name,
-                        script,
-                        status: 'success',
-                        message: '运行成功',
-                        data,
-                      },
-                    });
-                  }}
-                  >{key}</button>))
-                }
+                Object.keys(scripts).map(key => (<button
+                  onClick={() => this.run(`npm run ${key}`)}
+                >{key}</button>))
+              }
             </CardContent>
           </Collapse>
         </Card>
