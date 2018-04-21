@@ -82,6 +82,7 @@ class RecipeReviewCard extends React.Component {
         return {
           key,
           data: val.map(i => i.data).join('\n'),
+          // data: val.map(i => `${i.status}\n${i.data}`).join('\n'),
           message,
           newest,
         };
