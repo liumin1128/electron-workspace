@@ -59,7 +59,13 @@ class RecipeReviewCard extends React.Component {
     const list = log
       .get('list')
       .filter(i => i.project === name)
-      .groupBy(i => i.script);
+      .groupBy(i => i.script)
+      .map((val, key) => ({ key, val: val.map(i => i.data).join('↵') }));
+
+    console.log('list');
+    console.log(list);
+    console.log('list.toJS()');
+    console.log(list.toJS());
 
     const logs = log
       .get('list')
@@ -70,13 +76,19 @@ class RecipeReviewCard extends React.Component {
       <div>
         <ul>
           {
-            list.map((val, key) => {
-              return (<li>
-                <pre>
-                  {val.map(i => i.data)}
-                </pre>
-              </li>);
-            })
+            JSON.stringify(list)
+          }
+          {
+            // list.map((val, key, obj) => {
+            //   console.log(obj);
+            //   return (<li key={'111'}>
+            //     <span style={{ border: '1px red solid' }}>{key}</span>;
+            //     <p style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+            //       {val.map(i => i.data)}
+            //     </p>
+
+            //   </li>);
+            // })
           }
         </ul>
 
