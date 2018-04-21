@@ -13,6 +13,7 @@ const persistConfig = {
   })],
   key: 'root',
   storage,
+  whitelist: ['project'],
 };
 
 const bindMiddleware = (middleware) => {
