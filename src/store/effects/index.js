@@ -25,7 +25,7 @@ export default {
       type: 'log/push',
       payload: {
         project,
-        script: 'pwd -L',
+        script,
         status: 'loading',
         message: '运行中',
         data: script,
@@ -33,14 +33,14 @@ export default {
     });
 
     try {
-      const data = await run('pwd -L', { cwd: path });
+      const data = await run(script, { cwd: path });
       console.log('data');
       console.log(data);
       await dispatch({
         type: 'log/push',
         payload: {
           project,
-          script: 'pwd -L',
+          script,
           status: 'success',
           message: '运行成功',
           data,
@@ -53,7 +53,7 @@ export default {
         type: 'log/push',
         payload: {
           project,
-          script: 'pwd -L',
+          script,
           status: 'error',
           message: '运行失败',
           data: error,

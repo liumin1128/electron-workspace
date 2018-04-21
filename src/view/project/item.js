@@ -72,7 +72,7 @@ class RecipeReviewCard extends React.Component {
       .map((val, key) => {
         console.log('valxxx');
         console.log(val);
-        const { data, message } = val.get(-1);
+        const { data, message, status } = val.get(-1);
         console.log('data');
         console.log({ data });
         console.log('message');
@@ -91,6 +91,7 @@ class RecipeReviewCard extends React.Component {
           key,
           data: val.map(i => i.data).join('\n'),
           // data: val.map(i => `${i.status}\n${i.data}`).join('\n'),
+          status,
           message,
           newest,
         };

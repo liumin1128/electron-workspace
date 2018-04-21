@@ -22,7 +22,7 @@ const styles = theme => ({
   // },
   heading: {
     fontSize: theme.typography.pxToRem(14),
-    // flexBasis: '33.33%',
+    flexBasis: 50,
     flexShrink: 0,
     marginRight: 16,
   },
@@ -55,7 +55,7 @@ class ControlledExpansionPanels extends React.Component {
       <div className={classes.root}>
         {
           keys.map((key) => {
-            const { data, message } = list.get(key);
+            const { data, status } = list.get(key);
             console.log(list.get(key));
             return (<ExpansionPanel
               expanded={expanded === key}
@@ -69,7 +69,7 @@ class ControlledExpansionPanels extends React.Component {
                 }}
                 expandIcon={<ExpandMoreIcon />}
               >
-                <Typography className={classes.heading}>{message}</Typography>
+                <Typography className={classes.heading}>{status}</Typography>
                 <Typography className={classes.secondaryHeading}>{key}</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
