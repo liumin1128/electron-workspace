@@ -9,7 +9,8 @@ export default class ProjiectList extends PureComponent {
     const { project, dispatch } = this.props;
     console.log('project');
     console.log(project);
-    const list = project.get('list').toJS();
+    const list = project
+      .get('list').toJS();
     // console.log('list');
     // console.log(list);
     return (

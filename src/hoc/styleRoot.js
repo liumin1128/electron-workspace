@@ -8,7 +8,15 @@ import CssBaseline from 'material-ui/CssBaseline';
 // It's optional.
 const theme = createMuiTheme({
   overrides: {
+    MuiExpansionPanel: {
+      expanded: {
+        margin: 0,
+      },
+    },
     MuiPaper: {
+      elevation1: {
+        boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.05)',
+      },
       elevation2: {
         boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.05)',
       },

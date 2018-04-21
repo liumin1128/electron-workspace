@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
@@ -16,6 +16,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditIcon from '@material-ui/icons/Edit';
 import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import { run } from '../../utils/common';
+import Logs from './logs';
 
 const styles = theme => ({
   card: {
@@ -45,7 +46,7 @@ const styles = theme => ({
 
 @connect(({ log }) => ({ log }))
 class RecipeReviewCard extends React.Component {
-  state = { expanded: true };
+  state = { expanded: false };
 
   handleExpandClick = () => {
     this.setState({ expanded: !this.state.expanded });
@@ -60,12 +61,37 @@ class RecipeReviewCard extends React.Component {
       .get('list')
       .filter(i => i.project === name)
       .groupBy(i => i.script)
-      .map((val, key) => ({ key, val: val.map(i => i.data).join('↵') }));
+      .map((val, key) => {
+        console.log('valxxx');
+        console.log(val);
+        const { data, message } = val.get(-1);
+        console.log('data');
+        console.log({ data });
+        console.log('message');
+        console.log({ message });
+        const idx = data.lastIndexOf('\n');
 
-    console.log('list');
-    console.log(list);
-    console.log('list.toJS()');
-    console.log(list.toJS());
+        // console.log('idx');
+        // console.log(idx);
+
+        const newest = idx !== -1 ? data : data.substr(idx);
+
+        // console.log('newest');
+        // console.log(newest);
+
+        return {
+          key,
+          data: val.map(i => i.data).join('\n'),
+          message,
+          newest,
+        };
+      });
+      // .toJS();
+
+    // console.log('list');
+    // console.log(list);
+    // console.log('list.toJS()');
+    // console.log(list.toJS());
 
     const logs = log
       .get('list')
@@ -76,16 +102,21 @@ class RecipeReviewCard extends React.Component {
       <div>
         <ul>
           {
-            JSON.stringify(list)
+            // JSON.stringify(list)
           }
           {
             // list.map((val, key, obj) => {
             //   console.log(obj);
             //   return (<li key={'111'}>
             //     <span style={{ border: '1px red solid' }}>{key}</span>;
-            //     <p style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+            //     <pre style={{
+            //       // whiteSpace: 'nowrap',
+            //       // textOverflow: 'ellipsis',
+            //       // overflow: 'hidden',
+            //     }}
+            //     >
             //       {val.map(i => i.data)}
-            //     </p>
+            //     </pre>
 
             //   </li>);
             // })
@@ -192,6 +223,7 @@ class RecipeReviewCard extends React.Component {
               <ExpandMoreIcon />
             </IconButton>
           </CardActions>
+
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <pre>
@@ -225,6 +257,8 @@ class RecipeReviewCard extends React.Component {
             </CardContent>
           </Collapse>
         </Card>
+        <Logs list={list} />
+
       </div>
     );
   }
