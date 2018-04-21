@@ -12,6 +12,14 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
   },
+  // panel: {
+  //   margin: 0,
+  //   padding: 4,
+  //   minHeight: 24,
+  // },
+  // content: {
+  //   margin: 0,
+  // },
   heading: {
     fontSize: theme.typography.pxToRem(14),
     // flexBasis: '33.33%',
@@ -53,7 +61,14 @@ class ControlledExpansionPanels extends React.Component {
               expanded={expanded === key}
               onChange={this.handleChange(key)}
             >
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <ExpansionPanelSummary
+                // className={classes.panel}
+                classes={{
+                  content: classes.content,
+                  root: classes.panel,
+                }}
+                expandIcon={<ExpandMoreIcon />}
+              >
                 <Typography className={classes.heading}>{message}</Typography>
                 <Typography className={classes.secondaryHeading}>{key}</Typography>
               </ExpansionPanelSummary>
