@@ -7,6 +7,8 @@ import ExpansionPanel, {
 } from 'material-ui/ExpansionPanel';
 import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/styles/prism';
 
 const styles = theme => ({
   root: {
@@ -29,6 +31,14 @@ const styles = theme => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(14),
     color: theme.palette.text.secondary,
+  },
+  code: {
+    width: '100%',
+    maxHeight: 400,
+    overflowY: 'scroll',
+    '&>pre': {
+      width: '100%',
+    },
   },
 });
 
@@ -73,14 +83,11 @@ class ControlledExpansionPanels extends React.Component {
                 <Typography className={classes.secondaryHeading}>{key}</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <Typography>
-                  <pre>
-                    {
-                      data
-                      // list.get(key).toObject().map(i => ({ i.data })).jion(' ')
-                    }
-                  </pre>
-
+                <Typography className={classes.code}>
+                  <SyntaxHighlighter
+                    language="bash"
+                    style={atomDark}
+                  >{data}</SyntaxHighlighter>
                 </Typography>
               </ExpansionPanelDetails>
             </ExpansionPanel>);
