@@ -32,14 +32,16 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(14),
     color: theme.palette.text.secondary,
   },
+  ExpansionPanelDetails: {
+    paddingTop: 0,
+  },
   code: {
     width: '100%',
-    maxHeight: 400,
-    overflowY: 'scroll',
-    '&>pre': {
-      width: '100%',
-    },
+    // '&>pre': {
+    //   width: '100%',
+    // },
   },
+
 });
 
 class ControlledExpansionPanels extends React.Component {
@@ -82,11 +84,19 @@ class ControlledExpansionPanels extends React.Component {
                 <Typography className={classes.heading}>{status}</Typography>
                 <Typography className={classes.secondaryHeading}>{key}</Typography>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+              <ExpansionPanelDetails
+                className={classes.ExpansionPanelDetails}
+              >
                 <Typography className={classes.code}>
                   <SyntaxHighlighter
                     language="bash"
                     style={atomDark}
+                    customStyle={{
+                      borderRadius: 0,
+                      margin: 0,
+                      maxHeight: 400,
+                      overflowY: 'scroll',
+                    }}
                   >{data}</SyntaxHighlighter>
                 </Typography>
               </ExpansionPanelDetails>
