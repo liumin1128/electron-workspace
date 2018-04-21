@@ -188,6 +188,27 @@ class RecipeReviewCard extends React.Component {
             }}
             >pwd -L</button>
 
+            <br />
+
+            <button
+              onClick={async () => {
+              // const data = await run(
+              //   'pwd -L',
+              //   { cwd: path },
+              // );
+              // console.log('data');
+              // console.log(data);
+              dispatch({
+                type: 'runcommand',
+                payload: {
+                  project: name,
+                  script: 'pwd -L',
+                  path,
+                },
+              });
+            }}
+            >寻</button>
+
             <IconButton
               onClick={async () => {
                 const data = await run(
