@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import ProjectItem from './item';
+import Logs from './logs-bottom';
 
 @connect(({ project }) => ({ project }))
 export default class ProjiectList extends PureComponent {
@@ -20,6 +21,8 @@ export default class ProjiectList extends PureComponent {
             <ProjectItem {...i} />
           </Grid>))
         }
+
+        <Logs />
       </Grid>
     );
   }

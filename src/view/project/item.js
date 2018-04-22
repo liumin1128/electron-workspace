@@ -70,22 +70,22 @@ class RecipeReviewCard extends React.Component {
       .filter(i => i.project === name)
       .groupBy(i => i.script)
       .map((val, key) => {
-        console.log('valxxx');
-        console.log(val);
+        // console.log('valxxx');
+        // console.log(val);
         const { data, message, status } = val.get(-1);
-        console.log('data');
-        console.log({ data });
-        console.log('message');
-        console.log({ message });
+        // console.log('data');
+        // console.log({ data });
+        // console.log('message');
+        // console.log({ message });
         const idx = data.lastIndexOf('\n');
 
-        // console.log('idx');
-        // console.log(idx);
+        // // console.log('idx');
+        // // console.log(idx);
 
         const newest = idx !== -1 ? data : data.substr(idx);
 
-        // console.log('newest');
-        // console.log(newest);
+        // // console.log('newest');
+        // // console.log(newest);
 
         return {
           key,
@@ -98,10 +98,10 @@ class RecipeReviewCard extends React.Component {
       });
       // .toJS();
 
-    // console.log('list');
-    // console.log(list);
-    // console.log('list.toJS()');
-    // console.log(list.toJS());
+    // // console.log('list');
+    // // console.log(list);
+    // // console.log('list.toJS()');
+    // // console.log(list.toJS());
 
     const logs = log
       .get('list')
@@ -116,7 +116,7 @@ class RecipeReviewCard extends React.Component {
           }
           {
             // list.map((val, key, obj) => {
-            //   console.log(obj);
+            //   // console.log(obj);
             //   return (<li key={'111'}>
             //     <span style={{ border: '1px red solid' }}>{key}</span>;
             //     <pre style={{
@@ -156,8 +156,8 @@ class RecipeReviewCard extends React.Component {
                   `./code ${path}`,
                   { cwd: '/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin' },
                 );
-                console.log('data');
-                console.log(data);
+                // console.log('data');
+                // console.log(data);
               }}
               aria-label="Add to favorites"
             >
@@ -169,8 +169,8 @@ class RecipeReviewCard extends React.Component {
                   'npm run start',
                   { cwd: path },
                 );
-                console.log('data');
-                console.log(data);
+                // console.log('data');
+                // console.log(data);
               }}
               aria-label="Share"
             >
@@ -180,23 +180,23 @@ class RecipeReviewCard extends React.Component {
             <button
               onClick={async () => {
               const data = await run(
-                'pwd -L',
+                'terminal ./',
                 { cwd: path },
               );
-              console.log('data');
-              console.log(data);
+              // console.log('data');
+              // console.log(data);
               dispatch({
                 type: 'log/push',
                 payload: {
                   project: name,
-                  script: 'pwd -L',
+                  script: 'terminal ./',
                   status: 'success',
                   message: '运行成功',
                   data,
                 },
               });
             }}
-            >pwd -L</button>
+            >terminal ./</button>
 
             <br />
 
@@ -219,8 +219,8 @@ class RecipeReviewCard extends React.Component {
                   'ls ./',
                   { cwd: path },
                 );
-                console.log('data');
-                console.log(data);
+                // console.log('data');
+                // console.log(data);
                 dispatch({
                   type: 'log/push',
                   payload: {

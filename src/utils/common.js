@@ -1,5 +1,5 @@
 
-export const run = (script, options) =>
+export const run = (script, options, push) =>
   new Promise((resolve, reject) => {
     const [cmd, ...args] = script.split(' ');
     console.log('cmd, args');
@@ -7,9 +7,12 @@ export const run = (script, options) =>
 
     const { spawn } = window.require('child_process');
     const child = spawn(cmd, args, options);
-    let result = '';
+    const result = '';
     child.stdout.on('data', (data) => {
-      result += data.toString();
+      console.log('data.toString()');
+      console.log(data.toString());
+      push(data.toString());
+      // result += data.toString();
     });
     child.stdout.on('end', () => resolve(result));
     child.stderr.on('data', (data) => {
@@ -18,6 +21,9 @@ export const run = (script, options) =>
     });
     child.on('exit', (code, signal) => {
       console.log(`Exit: ${code} ${signal}`);
+      if (code !== 0) {
+        // reject(code);
+      }
       // reject(code);
     });
   });

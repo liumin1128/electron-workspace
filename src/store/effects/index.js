@@ -33,7 +33,18 @@ export default {
     });
 
     try {
-      const data = await run(script, { cwd: path });
+      const data = await run(script, { cwd: path }, (result) => {
+        dispatch({
+          type: 'log/push',
+          payload: {
+            project,
+            script,
+            status: 'loading',
+            message: '运行中',
+            data: result,
+          },
+        });
+      });
       console.log('data');
       console.log(data);
       await dispatch({

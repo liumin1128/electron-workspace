@@ -61,14 +61,14 @@ class ControlledExpansionPanels extends React.Component {
 
     const keys = Object.keys(list.toObject());
 
-    console.log('keys');
-    console.log(keys);
+    // console.log('keys');
+    // console.log(keys);
     return (
       <div className={classes.root}>
         {
           keys.map((key) => {
             const { data, status } = list.get(key);
-            console.log(list.get(key));
+            // console.log(list.get(key));
             return (<ExpansionPanel
               expanded={expanded === key}
               onChange={this.handleChange(key)}
@@ -94,7 +94,7 @@ class ControlledExpansionPanels extends React.Component {
                     customStyle={{
                       borderRadius: 0,
                       margin: 0,
-                      maxHeight: 400,
+                      height: 300,
                       overflowY: 'scroll',
                     }}
                   >{data}</SyntaxHighlighter>
